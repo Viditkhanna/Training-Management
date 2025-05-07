@@ -21,14 +21,15 @@ class EventManagementScreen extends StatelessWidget {
                     .toList(),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(16),
-
-          child: Column(
-            children: [
-              SearchField(),
-              SizedBox(height: 20),
-              Expanded(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: 20),
+            SearchField(),
+            SizedBox(height: 20),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16),
                 child: TabBarView(
                   children:
                       event.slotGroups
@@ -67,8 +68,8 @@ class EventManagementScreen extends StatelessWidget {
                           .toList(),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

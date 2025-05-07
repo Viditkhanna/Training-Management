@@ -12,12 +12,14 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     final totalWidth = MediaQuery.of(context).size.width;
-    final textFieldWidth = isVisible ? totalWidth * 0.75 : totalWidth;
+    final textFieldWidth = isVisible ? totalWidth * 0.85 : totalWidth;
+
     return Stack(
       children: [
         AnimatedContainer(
           width: textFieldWidth,
           height: 32,
+          padding: EdgeInsets.symmetric(horizontal: 16),
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           child: TextField(
