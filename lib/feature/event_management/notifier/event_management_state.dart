@@ -1,38 +1,36 @@
 import 'package:training_management/feature/event_management/model/event.dart';
 
 class EventManagementState {
-  final LoadingState loadingState;
-  final Event? event;
+  final LoadingState<Event> loadingState;
 
-  EventManagementState({this.loadingState = const Initial(), this.event});
+  EventManagementState({this.loadingState = const Initial()});
 
-  EventManagementState copyWith({LoadingState? loadingState, Event? event}) {
+  EventManagementState copyWith({LoadingState<Event>? loadingState}) {
     return EventManagementState(
       loadingState: loadingState ?? this.loadingState,
-      event: event ?? this.event,
     );
   }
 }
 
-sealed class LoadingState {
+sealed class LoadingState<T> {
   const LoadingState();
 }
 
-class Initial extends LoadingState {
+class Initial<T> extends LoadingState<T> {
   const Initial();
 }
 
-class Loading extends LoadingState {
+class Loading<T> extends LoadingState<T> {
   const Loading();
 }
 
-class Success extends LoadingState {
-  final Event event;
+class Success<T> extends LoadingState<T> {
+  final T event;
 
   const Success({required this.event});
 }
 
-class Failure extends LoadingState {
+class Failure<T> extends LoadingState<T> {
   final Exception exception;
 
   const Failure({required this.exception});
