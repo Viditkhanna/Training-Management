@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final eventDataProvider = Provider.autoDispose((ref) => EventLocalDataImpl());
 
 abstract class EventData {
   Future<Map<String, dynamic>> getEventData();
