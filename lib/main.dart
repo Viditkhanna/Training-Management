@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'feature/event_management/view/event_management.dart';
+import 'feature/event_management/view/event_management_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const EventManagement(),
+      home: const EventManagementView(),
     );
   }
 }

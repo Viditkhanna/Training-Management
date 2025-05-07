@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EventManagement extends StatelessWidget {
-  const EventManagement({super.key});
+class EventManagementView extends StatelessWidget {
+  const EventManagementView({super.key});
 
   @override
   Widget build(BuildContext context) {
