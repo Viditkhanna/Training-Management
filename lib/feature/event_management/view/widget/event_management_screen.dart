@@ -20,7 +20,56 @@ class EventManagementScreen extends StatelessWidget {
                     .toList(),
           ),
         ),
-        body: ListView(padding: EdgeInsets.all(16), children: [SearchField()]),
+        body: Padding(
+          padding: EdgeInsets.all(16),
+
+          child: Column(
+            children: [
+              SearchField(),
+              Expanded(
+                child: TabBarView(
+                  children:
+                      event.slotGroups
+                          .map(
+                            (slot) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 20),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Event: ',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: event.eventName,
+                                        style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ...slot.resources.map(
+                                  (resource) => ListTile(
+                                    title: Text(resource.firstName),
+                                    contentPadding: EdgeInsets.zero,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
