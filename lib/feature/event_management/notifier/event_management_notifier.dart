@@ -18,8 +18,12 @@ class EventManagementNotifier extends StateNotifier<EventManagementState> {
       super(EventManagementState());
 
   Future<void> _init() async {
-    state = state.copyWith(loadingState: Loading());
-    final event = await _repository.getEventDetails();
-    state = state.copyWith(loadingState: Success(event: event));
+    try {
+      state = state.copyWith(loadingState: Loading());
+      final event = await _repository.getEventDetails();
+      state = state.copyWith(loadingState: Success(event: event));
+    } on Exception catch (e) {
+      state = state.copyWith(loadingState: Failure(exception: e));
+    }
   }
 }
