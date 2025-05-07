@@ -7,12 +7,13 @@ final eventManagementRepositoryProvider = Provider.autoDispose((ref) {
 });
 
 class EventManagementRepository {
-  final EventData eventData;
+  final EventData _eventData;
 
-  EventManagementRepository({required this.eventData});
+  EventManagementRepository({required EventData eventData})
+    : _eventData = eventData;
 
   Future<Event> getEventDetails() async {
-    final response = await eventData.getEventData();
+    final response = await _eventData.getEventData();
     return Event.fromJson(response);
   }
 }
