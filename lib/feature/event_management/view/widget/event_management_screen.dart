@@ -26,6 +26,7 @@ class EventManagementScreen extends StatelessWidget {
           child: Column(
             children: [
               SearchField(),
+              SizedBox(height: 20),
               Expanded(
                 child: TabBarView(
                   children:
@@ -34,7 +35,6 @@ class EventManagementScreen extends StatelessWidget {
                             (slot) => Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 20),
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -55,11 +55,10 @@ class EventManagementScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                SizedBox(height: 20),
                                 ...slot.resources.map(
-                                  (resource) => ListTile(
-                                    title: Text(resource.firstName),
-                                    contentPadding: EdgeInsets.zero,
-                                  ),
+                                  (resource) =>
+                                      ResourceTileView(resource: resource),
                                 ),
                               ],
                             ),
@@ -71,6 +70,30 @@ class EventManagementScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ResourceTileView extends StatelessWidget {
+  const ResourceTileView({super.key, required this.resource});
+  final Resource resource;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Container(
+        height: 40,
+        width: 40,
+        padding: EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.grey, strokeAlign: 5),
+          image: DecorationImage(image: NetworkImage(resource.photo)),
+        ),
+      ),
+      subtitle: Text(resource.userId),
+      title: Text('${resource.firstName} ${resource.name}'),
+      contentPadding: EdgeInsets.zero.copyWith(left: 4),
     );
   }
 }
