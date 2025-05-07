@@ -11,15 +11,30 @@ class EventManagementView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final event = ref.watch(eventManagementNotifierProvider);
 
-    return Scaffold(
-      body: switch (event.loadingState) {
-        Initial<Event>() => SizedBox.shrink(),
-        Loading<Event>() => Center(child: CircularProgressIndicator()),
-        Success<Event>(event: Event event) => ListView(children: []),
-        Failure<Event>(exception: Exception exception) => Center(
-          child: Text(exception.toString()),
+    return switch (event.loadingState) {
+      Initial<Event>() => Scaffold(body: SizedBox.shrink()),
+      Loading<Event>() => Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      ),
+      Success<Event>(event: Event event) => Scaffold(
+        appBar: AppBar(title: Text(event.categoryName)),
+        body: DefaultTabController(
+          length: event.slotGroups.length,
+          child: ListView(
+            children: [
+              TabBar(
+                tabs:
+                    event.slotGroups
+                        .map((slot) => Tab(text: slot.slotGroupName))
+                        .toList(),
+              ),
+            ],
+          ),
         ),
-      },
-    );
+      ),
+      Failure<Event>(exception: Exception exception) => Scaffold(
+        body: Center(child: Text(exception.toString())),
+      ),
+    };
   }
 }
