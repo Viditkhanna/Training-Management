@@ -15,6 +15,8 @@ class EventManagementScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(event.categoryName),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
             tabs:
                 event.slotGroups
                     .map((slot) => Tab(text: slot.slotGroupName))
